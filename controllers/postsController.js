@@ -4,9 +4,9 @@ const multer = require('multer');
 const postsFilePath = path.join(__dirname, '../posts.json');
 
 // Funzione per salvare l'array dei post in un file JSON
-function savePostsToFile(postsArray) {
+const savePostsToFile = (postsArray) => {
   fs.writeFileSync(postsFilePath, JSON.stringify(postsArray, null, 2), 'utf8');
-}
+};
 
 // Index: Ritorna una lista dei post
 const index = (req, res) => {
@@ -106,7 +106,7 @@ const download = (req, res) => {
 };
 
 // Funzione per gestire la creazione di un nuovo post
-function store(req, res) {
+const store = (req, res) => {
   const { title, slug, content, image, tags } = req.body;
   const newPost = { title, slug, content, image, tags };
   posts.push(newPost);
@@ -115,10 +115,10 @@ function store(req, res) {
   } else {
     res.json(newPost);
   }
-}
+};
 
 // Funzione per gestire l'eliminazione di un post
-function destroy(req, res) {
+const destroy = (req, res) => {
   const { slug } = req.params;
   const index = posts.findIndex((post) => post.slug === slug);
   if (index !== -1) {
@@ -131,7 +131,7 @@ function destroy(req, res) {
   } else {
     res.status(404).send('Post non trovato');
   }
-}
+};
 
 module.exports = {
   index,
