@@ -1,5 +1,12 @@
 const posts = require('../data/posts.js');
 const path = require('path');
+const multer = require('multer');
+const postsFilePath = path.join(__dirname, '../posts.json');
+
+// Funzione per salvare l'array dei post in un file JSON
+function savePostsToFile(postsArray) {
+  fs.writeFileSync(postsFilePath, JSON.stringify(postsArray, null, 2), 'utf8');
+}
 
 // Index: Ritorna una lista dei post
 const index = (req, res) => {
