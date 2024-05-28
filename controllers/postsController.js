@@ -98,9 +98,22 @@ const download = (req, res) => {
   }
 };
 
+// Funzione per gestire la creazione di un nuovo post
+function store(req, res) {
+  const { title, slug, content, image, tags } = req.body;
+  const newPost = { title, slug, content, image, tags };
+  posts.push(newPost);
+  if (req.accepts('html')) {
+    res.redirect('/');
+  } else {
+    res.json(newPost);
+  }
+}
+
 module.exports = {
   index,
   create,
   show,
   download,
+  store,
 };
