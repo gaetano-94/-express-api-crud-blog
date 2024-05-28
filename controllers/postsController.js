@@ -110,10 +110,27 @@ function store(req, res) {
   }
 }
 
+// Funzione per gestire l'eliminazione di un post
+function destroy(req, res) {
+  const { slug } = req.params;
+  const index = posts.findIndex((post) => post.slug === slug);
+  if (index !== -1) {
+    posts.splice(index, 1);
+    if (req.accepts('html')) {
+      res.redirect('/');
+    } else {
+      res.send('Post eliminato');
+    }
+  } else {
+    res.status(404).send('Post non trovato');
+  }
+}
+
 module.exports = {
   index,
   create,
   show,
   download,
   store,
+  destroy,
 };
